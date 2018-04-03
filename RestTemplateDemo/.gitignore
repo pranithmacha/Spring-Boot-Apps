@@ -24,4 +24,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-/gradle
+/gradle/
+/out/
+gradlew.bat

@@ -1,4 +1,4 @@
-package com.rest.template.demo.RestTemplateDemo;
+package com.rest.template.demo;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
