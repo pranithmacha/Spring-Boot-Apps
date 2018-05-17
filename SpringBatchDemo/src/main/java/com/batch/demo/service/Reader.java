@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Reader implements ItemReader<Car> {
 
     public static int count;
-    private int index;
+    private int numOfRecords;
     private int start;
 
     @Autowired
@@ -20,14 +20,14 @@ public class Reader implements ItemReader<Car> {
     public Car read() {
 //        log.info("reading");
         count++;
-        if (count > index)
+        if (count > this.numOfRecords)
             return null;
         Car car = carRepository.findCarById(count + start);
         return car;
     }
 
-    public Reader(int index, int start) {
-        this.index = index;
+    public Reader(int numOfRecords, int start) {
+        this.numOfRecords = numOfRecords;
         this.start = start;
     }
 }

@@ -17,14 +17,15 @@ public class BatchController {
 
     private Job processJob;
 
-    @GetMapping(value = "/start")
-    public String startBatch() throws Exception {
+    @GetMapping(value = "/start/{count}/{start}")
+    public String startBatch(@PathVariable("count") long count,
+                             @PathVariable("start") long start) throws Exception {
         JobParameters jobParameters = new JobParametersBuilder()
                 .addLong("time", System.currentTimeMillis())
-                .addLong("count", new Long(10000))
-                .addLong("start", new Long(31017))
+                .addLong("count", count) // 10000
+                .addLong("start", start) //31017
                 .toJobParameters();
-        log.info("starting ...");
+        log.info("starting job...");
         jobLauncher.run(processJob, jobParameters);
         return "Batch job has been invoked";
     }
