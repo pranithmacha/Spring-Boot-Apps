@@ -7,5 +7,6 @@ import java.util.List;
 
 @Data
 public class ProductsServiceResponse {
+    String traceId;
     List<Product> products = new ArrayList<>();
 }

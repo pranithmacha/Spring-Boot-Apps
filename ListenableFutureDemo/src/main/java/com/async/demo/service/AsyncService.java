@@ -19,22 +19,25 @@ public class AsyncService {
 
     private AtomicInteger count = new AtomicInteger();
 
-    private Map<String, ProductsServiceResponse> myaaappp = new HashMap<>();
+    private Map<String, String> myaaappp = new HashMap<>();
 
     @Value("${products.service.url}")
     private String productsServiceURL;
 
+    @Value("${weather.service.url}")
+    private String weatherServiceURL;
+
     public void callRestService(int numOfCalls) {
         for (int i = 0; i < numOfCalls; i++) {
             restService.get(productsServiceURL).addCallback(
-                    new ListenableFutureCallback<ProductsServiceResponse>() {
+                    new ListenableFutureCallback<String>() {
                         @Override
                         public void onFailure(Throwable ex) {
                             log.error("Error while getting products from Products Service");
                         }
 
                         @Override
-                        public void onSuccess(ProductsServiceResponse result) {
+                        public void onSuccess(String result) {
                             log.info("response is ::: " + count.incrementAndGet() + result);
                         }
                     }
@@ -44,20 +47,20 @@ public class AsyncService {
 
     public ProductsServiceResponse callRestService() {
         restService.get(productsServiceURL).addCallback(
-                new ListenableFutureCallback<ProductsServiceResponse>() {
+                new ListenableFutureCallback<String>() {
                     @Override
                     public void onFailure(Throwable ex) {
                         log.error("Error while getting products from Products Service");
                     }
 
                     @Override
-                    public void onSuccess(ProductsServiceResponse result) {
+                    public void onSuccess(String result) {
                         myaaappp.put("key", result);
                         log.info("response is ::: " + count.incrementAndGet() + result);
                     }
                 }
         );
-        return myaaappp.get("key");
+        return null;
     }
 
     @Autowired

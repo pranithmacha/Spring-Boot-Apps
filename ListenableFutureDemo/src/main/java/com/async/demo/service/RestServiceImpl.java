@@ -1,6 +1,5 @@
 package com.async.demo.service;
 
-import com.async.demo.dto.ProductsServiceResponse;
 import com.async.demo.exception.RestException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +27,10 @@ public class RestServiceImpl implements RestService {
 
     @Async
     @Override
-    public ListenableFuture<ProductsServiceResponse> get(String URL) {
+    public ListenableFuture<String> get(String URL) {
         String responseBody = call(null, URL, HttpMethod.GET);
-        ProductsServiceResponse productsServiceResponse = createResponse(responseBody, ProductsServiceResponse.class);
-        return new AsyncResult<>(productsServiceResponse);
+//        ProductsServiceResponse productsServiceResponse = createResponse(responseBody, valueType);
+        return new AsyncResult<>(responseBody);
     }
 
     @Override
